@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddleware from "../middleware/auth.js";
+import { authenticateUser } from "../middleware/auth.js";
 import testUser from "../middleware/testUser.js";
 import {
   getAllJobs,
@@ -13,12 +13,12 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(authMiddleware, getAllJobs)
-  .post(authMiddleware, testUser, createJob);
-router.route("/stats").get(authMiddleware, showStats);
+  .get(authenticateUser, getAllJobs)
+  .post(authenticateUser, testUser, createJob);
+router.route("/stats").get(authenticateUser, showStats);
 router
   .route("/:id")
-  .delete(authMiddleware, testUser, deleteJob)
-  .patch(authMiddleware, testUser, updateJob);
+  .delete(authenticateUser, testUser, deleteJob)
+  .patch(authenticateUser, testUser, updateJob);
 
 export default router;

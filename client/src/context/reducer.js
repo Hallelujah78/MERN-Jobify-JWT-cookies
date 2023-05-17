@@ -83,7 +83,7 @@ const reducer = (state, action) => {
   if (action.type === LOGIN_USER_ERROR) {
     return {
       ...state,
-      isLoggedIn: false,
+
       isLoading: false,
       showAlert: true,
       alertText: action.payload.msg,
@@ -93,7 +93,7 @@ const reducer = (state, action) => {
   if (action.type === LOGIN_USER_SUCCESS) {
     return {
       ...state,
-      isLoggedIn: true,
+
       isLoading: false,
       showAlert: true,
       alertText: "Login Successful! Redirecting...",
@@ -114,7 +114,6 @@ const reducer = (state, action) => {
     return {
       ...initialState,
       userLoading: false,
-      isLoggedIn: false,
     };
   }
 

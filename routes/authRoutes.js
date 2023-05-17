@@ -10,7 +10,7 @@ import {
 } from "../controllers/authController.js";
 import express from "express";
 import testUser from "../middleware/testUser.js";
-import authenticateUser from "../middleware/auth.js";
+import { authenticateUser } from "../middleware/auth.js";
 import rateLimit from "express-rate-limit";
 
 const apiLimiter = rateLimit({
@@ -27,7 +27,7 @@ router.route("/register").post(apiLimiter, register);
 router.route("/updateUser").patch(authenticateUser, testUser, updateUser);
 
 router.route("/getCurrentUser").get(authenticateUser, getCurrentUser);
-router.route("/logoutUser").get(logoutUser);
+router.route("/logoutUser").delete(authenticateUser, logoutUser);
 router.route("/verify-email").post(verifyEmail);
 router.route("/reset-password").post(resetPassword);
 router.route("/forgot-password").post(forgotPassword);

@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import User from "../models/User.js";
-
+import Token from "../models/Token.js";
 import * as CustomError from "../errors/index.js";
 import {
   createTokenUser,
@@ -25,10 +25,33 @@ const login = async (req, res) => {
   if (!isPasswordCorrect) {
     throw new CustomError.UnauthenticatedError("invalid credentials");
   }
-  const token = user.createJWT();
+  if (!user.isVerified) {
+    throw new CustomError.UnauthenticatedError("please verify your email");
+  }
+  // const token = user.createJWT();
   const tokenUser = createTokenUser(user);
-  attachCookie({ res, token });
 
+  let refreshToken = "";
+  const existingToken = await Token.findOne({ user: user._id });
+  if (existingToken) {
+    const { isValid } = existingToken;
+    if (!isValid) {
+      throw new CustomError.UnauthenticatedError("invalid credentials");
+    }
+    refreshToken = existingToken.refreshToken;
+    attachCookiesToResponse({ res, user: tokenUser, refreshToken });
+
+    res.status(StatusCodes.OK).json({ user: tokenUser });
+    return;
+  }
+  // no existing token
+  refreshToken = crypto.randomBytes(40).toString("hex");
+  const userAgent = req.headers["user-agent"];
+  const ip = req.ip;
+  const userToken = { refreshToken, ip, userAgent, user: user._id };
+
+  await Token.create(userToken);
+  attachCookiesToResponse({ res, user: tokenUser, refreshToken });
   res.status(StatusCodes.OK).json({ user: tokenUser });
 };
 
@@ -55,12 +78,28 @@ const register = async (req, res) => {
   });
 };
 
-const logoutUser = async (req, res) => {
+const logoutUserOld = async (req, res) => {
   res.cookie("token", "logout", {
     httpOnly: true,
     expires: new Date(Date.now()),
   });
   res.status(StatusCodes.OK).json({ msg: "user logged out" });
+};
+
+const logoutUser = async (req, res) => {
+  await Token.findOneAndDelete({
+    user: req.user.userId,
+  });
+
+  res.cookie("refreshToken", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.cookie("accessToken", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.status(StatusCodes.OK).json({ msg: "user logged out!" });
 };
 
 const updateUser = async (req, res) => {

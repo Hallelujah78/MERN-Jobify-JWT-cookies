@@ -39,7 +39,6 @@ import {
 } from "./actions";
 
 const initialState = {
-  isLoggedIn: false,
   isError: false,
   pathName: "",
   isRegistered: false,
@@ -94,15 +93,16 @@ const AppProvider = ({ children }) => {
     },
     (error) => {
       const status = error.response.status;
-      if (status === 401 && !state.isLoggedIn) {
-        //backend 401
-        // if not logged in (default)
+      if (status === 401 && !state.user) {
+        // backend 401
+        // if there is no user
         // setUserLoading to false (default true)
         // no need to logoutUser()
         setUserLoadingFalse();
+        return Promise.reject(error);
       }
 
-      if (status === 401) {
+      if (status === 401 && state.user) {
         // if status 401 and userIsLoading (true)
         // logoutUser
         logoutUser();
@@ -194,7 +194,7 @@ const AppProvider = ({ children }) => {
       type: LOGOUT_USER,
     });
     try {
-      await authFetch.get("/auth/logoutUser");
+      await authFetch.delete("/auth/logoutUser");
     } catch (error) {
       console.log(error.response);
     }
@@ -280,8 +280,7 @@ const AppProvider = ({ children }) => {
         payload: { jobs, totalJobs, numOfPages },
       });
     } catch (error) {
-      console.log(error.response.data.msg);
-      logoutUser();
+      console.log("GET_JOBS_ERROR");
     }
     clearAlert();
   };
@@ -326,10 +325,7 @@ const AppProvider = ({ children }) => {
       await authFetch.delete(`/jobs/${id}`);
       getJobs();
     } catch (error) {
-      const status = error.response.status;
-      if (status === 401) {
-        logoutUser();
-      }
+      console.log("DELETE_JOB_ERROR");
       dispatch({
         type: DELETE_JOB_ERROR,
         payload: { msg: error.response.data.msg },
@@ -350,10 +346,9 @@ const AppProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log(error.response);
-      logoutUser();
+      console.log("SHOW_STATS_ERROR");
     }
-    clearAlert(); // precaution only, not necessary in this set up
+    clearAlert();
   };
 
   const clearFilters = () => {
@@ -373,8 +368,8 @@ const AppProvider = ({ children }) => {
       } = data;
       dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user, location } });
     } catch (error) {
+      console.log("GET_CURRENT_USER_ERROR");
       if (error.response.status === 401) return;
-      logoutUser();
     }
   };
 
