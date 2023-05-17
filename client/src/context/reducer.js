@@ -1,5 +1,6 @@
 import { initialState } from "./appContext.js";
 import {
+  SET_USER_NULL,
   SET_USER_LOADING,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
@@ -313,6 +314,12 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === SET_USER_NULL) {
+    return {
+      ...state,
+      user: null,
+    };
+  }
   throw new Error(`no such action :${action.type}`);
 };
 

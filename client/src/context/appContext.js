@@ -3,6 +3,7 @@ import reducer from "./reducer";
 import axios from "axios";
 
 import {
+  SET_USER_NULL,
   SET_USER_LOADING,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
@@ -93,6 +94,12 @@ const AppProvider = ({ children }) => {
     },
     (error) => {
       const status = error.response.status;
+      if (!error.response) {
+        setUserNull();
+        setUserLoadingFalse();
+        return Promise.reject(error);
+      }
+
       if (status === 401 && !state.user) {
         // backend 401
         // if there is no user
@@ -113,6 +120,10 @@ const AppProvider = ({ children }) => {
 
   const setUserLoadingFalse = () => {
     dispatch({ type: SET_USER_LOADING });
+  };
+
+  const setUserNull = () => {
+    dispatch({ type: SET_USER_NULL });
   };
 
   const handleChange = ({ name, value }) => {
@@ -311,6 +322,7 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
       if (error.response.status === 401) return;
+
       dispatch({
         type: EDIT_JOB_ERROR,
         payload: { msg: error.response.data.msg },

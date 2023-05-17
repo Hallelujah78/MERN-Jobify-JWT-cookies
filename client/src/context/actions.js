@@ -68,3 +68,6 @@ export const VERIFY_EMAIL_SUCCESS = "VERIFY_EMAIL_SUCCESS";
 
 // user loading - experimental:
 export const SET_USER_LOADING = "SET_USER_LOADING";
+
+// user null - experimental:
+export const SET_USER_NULL = "SET_USER_NULL";
