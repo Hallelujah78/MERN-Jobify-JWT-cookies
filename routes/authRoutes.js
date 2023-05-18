@@ -29,7 +29,7 @@ router.route("/updateUser").patch(authenticateUser, testUser, updateUser);
 router.route("/getCurrentUser").get(authenticateUser, getCurrentUser);
 router.route("/logoutUser").delete(authenticateUser, logoutUser);
 router.route("/verify-email").post(verifyEmail);
-router.route("/reset-password").post(resetPassword);
-router.route("/forgot-password").post(forgotPassword);
+router.route("/reset-password").post(apiLimiter, resetPassword);
+router.route("/forgot-password").post(apiLimiter, forgotPassword);
 
 export default router;

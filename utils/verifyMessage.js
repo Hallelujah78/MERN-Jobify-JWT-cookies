@@ -1,11 +1,4 @@
-import sendMail from "./sendMail.js";
-
-const sendVerificationEmail = async ({ user, origin }) => {
-  const { email, name, verificationToken } = user;
-
-  const verifyEmailLink = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
-  const text = `Verify your email to finish signing up\n\n${name}, thank you for choosing Jobify.\n\nPlease confirm your email address using the link below:\n\n${verifyEmailLink}\n\nYou are receiving this email because you have registered with our site. Make sure our messages get to your inbox (and not your bulk or junk folders).\nPrivacy Policy: ${origin}`;
-  const message = `<!DOCTYPE html
+`<!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
   style="font-family:Montserrat, sans-serif">
@@ -453,7 +446,9 @@ const sendVerificationEmail = async ({ user, origin }) => {
 				<v:fill type="tile" color="#ffffff"></v:fill>
 			</v:background>
 		<![endif]-->
-    
+    <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0"
+      style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FFFFFF">
+      <tr>
 
         <table cellpadding="0" cellspacing="0" class="es-header" align="center"
           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
@@ -463,7 +458,7 @@ const sendVerificationEmail = async ({ user, origin }) => {
                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:700px">
                 <tr>
                   <td align="left"
-                    style="Margin:0;padding-bottom:10px;padding-top:3rem;padding-left:20px;padding-right:20px">
+                    style="Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px">
                     <table cellpadding="0" cellspacing="0" width="100%"
                       style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                       <tr>
@@ -471,13 +466,26 @@ const sendVerificationEmail = async ({ user, origin }) => {
                           <table cellpadding="0" cellspacing="0" width="100%" role="presentation"
                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                             <tr>
-                              <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href=${origin}
+                              <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="****"
                                   style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:14px"><img
-                                    class="adapt-img" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684400274/logoSVG_nyjqnq.svg" alt="Logo"
+                                    class="adapt-img" src="****" alt="Logo"
                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                     height="34" title="Logo"></a></td>
                             </tr>
-                           
+                            <tr>
+                              <td align="center"
+                                style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0">
+                                <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0"
+                                  role="presentation"
+                                  style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                  <tr>
+                                    <td
+                                      style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px">
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
 
                             <tr>
                               <td align="center"
@@ -519,7 +527,7 @@ const sendVerificationEmail = async ({ user, origin }) => {
                           <table cellpadding="0" cellspacing="0" width="100%" role="presentation"
                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                             <tr>
-                              <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684413220/icons8-open-envelope-100_ccmsmo.png" alt
+                              <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="****" alt
                                   style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                   width="100"></td>
                             </tr>
@@ -550,7 +558,7 @@ const sendVerificationEmail = async ({ user, origin }) => {
                                 <p
                                   style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:24px;color:#333333;font-size:16px">
                                   ${name},
-                                  thank you for choosing Jobify!</p>
+                                  thank you for choosing Jobify</p>
                                 <p
                                   style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:24px;color:#333333;font-size:16px">
                                   <br>
@@ -576,15 +584,15 @@ const sendVerificationEmail = async ({ user, origin }) => {
                             </tr>
                             <tr>
                               <td align="center" class="es-m-txt-l"
-                                style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href=${verifyEmailLink} target="_blank" hidden>
-	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href=${verifyEmailLink} 
+                                style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href="****" target="_blank" hidden>
+	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="****" 
                 style="height:39px; v-text-anchor:middle; width:189px" arcsize="0%" strokecolor="#999999" strokeweight="1px" fillcolor="#ffffff">
 		<w:anchorlock></w:anchorlock>
 		<center style='color:#666666; font-family:Montserrat, sans-serif; font-size:14px; font-weight:400; line-height:14px;  mso-text-raise:1px'>Verify my email</center>
 	</v:roundrect></a>
 <![endif]--><!--[if !mso]><!-- --><span class="es-button-border msohide"
                                   style="border-style:solid;border-color:#999999;background:#ffffff;border-width:1px;display:inline-block;border-radius:0px;width:auto;mso-border-alt:10px;mso-hide:all"><a
-                                    href=${verifyEmailLink} class="es-button" target="_blank"
+                                    href="****" class="es-button" target="_blank"
                                     style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#666666;font-size:16px;padding:10px 30px 10px 30px;display:inline-block;background:#ffffff;border-radius:0px;font-family:Montserrat, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-color:#ffffff">Verify
                                     my email</a></span><!--<![endif]--></td>
                             </tr>
@@ -669,27 +677,27 @@ const sendVerificationEmail = async ({ user, origin }) => {
                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                   <tr>
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
-                                        target="_blank" href=${origin}
+                                        target="_blank" href="****"
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Facebook" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414281/icons8-facebook-48_kdzmdz.png" alt="Fb" width="32"
+                                          title="Facebook" src="****" alt="Fb" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
-                                        target="_blank" href=${origin}
+                                        target="_blank" href="****"
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Twitter" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414291/icons8-twitter-48_oeawjr.png" alt="Tw" width="32"
+                                          title="Twitter" src="****" alt="Tw" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
-                                        target="_blank" href=${origin}
+                                        target="_blank" href="****"
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Instagram" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414292/icons8-instagram-48_azcuxl.png" alt="Inst" width="32"
+                                          title="Instagram" src="****" alt="Inst" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0"><a target="_blank"
-                                        href=${origin}
+                                        href="****"
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Youtube" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414292/icons8-youtube-48_p2e6xi.png" alt="Yt" width="32"
+                                          title="Youtube" src="****" alt="Yt" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                   </tr>
@@ -746,7 +754,9 @@ const sendVerificationEmail = async ({ user, origin }) => {
                                   messages get to your Inbox (and not your bulk or
                                   junk folders).<br><a target="_blank"
                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px;line-height:18px"
-                                    href=${origin}>Privacy policy</a></p>
+                                    href="****">Privacy policy</a> | <a target="_blank"
+                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px;line-height:18px"
+                                    href="****">Unsubscribe</a></p>
                               </td>
                             </tr>
                           </table>
@@ -762,12 +772,7 @@ const sendVerificationEmail = async ({ user, origin }) => {
 
       </tr>
     </table>
- 
   </div>
 </body>
 
 </html>`;
-  return sendMail({ to: email, subject: "Email Verification", html: message });
-};
-
-export default sendVerificationEmail;

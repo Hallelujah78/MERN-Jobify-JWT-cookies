@@ -4,13 +4,16 @@ import * as CustomError from "../errors/index.js";
 
 const authenticateUser = async (req, res, next) => {
   const { refreshToken, accessToken } = req.signedCookies;
+
   try {
     if (accessToken) {
       const payload = isTokenValid(accessToken);
-      req.user = payload.user;
+      const testUser = payload.user.userId === "646675908850bf9555767c0e";
+      req.user = { userId: payload.user.userId, testUser };
       return next();
     }
     const payload = isTokenValid(refreshToken);
+    const testUser = payload.user.userId === "646675908850bf9555767c0e";
     const existingToken = await Token.findOne({
       user: payload.user.userId,
       refreshToken: payload.refreshToken,
@@ -23,7 +26,7 @@ const authenticateUser = async (req, res, next) => {
       user: payload.user,
       refreshToken: existingToken.refreshToken,
     });
-    req.user = payload.user;
+    req.user = { userId: payload.user.userId, testUser };
     next();
   } catch (error) {
     console.log("AUTHENTICATE_USER_CATCH_ERROR");
@@ -40,7 +43,7 @@ const authSingleCookie = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
-    const testUser = payload.userId === "6446d438c18d00c279afd42a";
+    const testUser = payload.userId === "646675908850bf9555767c0e";
     req.user = { userId: payload.userId, testUser };
 
     next();

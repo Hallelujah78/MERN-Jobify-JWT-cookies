@@ -374,6 +374,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_CURRENT_USER_BEGIN });
     try {
       const { data } = await authFetch("/auth/getCurrentUser");
+
       const {
         user,
         user: { location },
@@ -381,6 +382,7 @@ const AppProvider = ({ children }) => {
       dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user, location } });
     } catch (error) {
       console.log("GET_CURRENT_USER_ERROR");
+      console.log(error.response);
       if (error.response.status === 401) return;
     }
   };

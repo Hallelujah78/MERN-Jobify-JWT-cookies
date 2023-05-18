@@ -1,10 +1,11 @@
-import sendMail from "./sendMail.js";
+import sendMailSendGrid from "./sendMailSendGrid.js";
 
-const sendVerificationEmail = async ({ user, origin }) => {
+const sendVerificationEmailSG = async ({ user, origin }) => {
   const { email, name, verificationToken } = user;
 
   const verifyEmailLink = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
   const text = `Verify your email to finish signing up\n\n${name}, thank you for choosing Jobify.\n\nPlease confirm your email address using the link below:\n\n${verifyEmailLink}\n\nYou are receiving this email because you have registered with our site. Make sure our messages get to your inbox (and not your bulk or junk folders).\nPrivacy Policy: ${origin}`;
+
   const message = `<!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -473,7 +474,7 @@ const sendVerificationEmail = async ({ user, origin }) => {
                             <tr>
                               <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href=${origin}
                                   style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:14px"><img
-                                    class="adapt-img" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684400274/logoSVG_nyjqnq.svg" alt="Logo"
+                                    class="adapt-img" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684452108/logoSVG_jupu7j.png" alt="Logo"
                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                     height="34" title="Logo"></a></td>
                             </tr>
@@ -767,7 +768,13 @@ const sendVerificationEmail = async ({ user, origin }) => {
 </body>
 
 </html>`;
-  return sendMail({ to: email, subject: "Email Verification", html: message });
+
+  return sendMailSendGrid({
+    to: email,
+    subject: "Email Verification",
+    html: message,
+    text: text,
+  });
 };
 
-export default sendVerificationEmail;
+export default sendVerificationEmailSG;

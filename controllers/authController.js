@@ -6,8 +6,8 @@ import {
   createTokenUser,
   attachCookie,
   attachCookiesToResponse,
-  sendVerificationEmail,
-  sendResetPasswordEmail,
+  sendResetPasswordEmailSG,
+  sendVerificationEmailSG,
 } from "../utils/index.js";
 import crypto from "crypto";
 
@@ -71,7 +71,7 @@ const register = async (req, res) => {
 
   const user = await User.create({ name, email, password, verificationToken });
   const origin = "http://localhost:3000";
-  await sendVerificationEmail({ user, origin });
+  await sendVerificationEmailSG({ user, origin });
 
   res.status(StatusCodes.CREATED).json({
     msg: "Success! please check your email and verify your account",
@@ -120,6 +120,7 @@ const updateUser = async (req, res) => {
 };
 
 const getCurrentUser = async (req, res) => {
+  console.log(req.user.userId);
   const user = await User.findOne({ _id: req.user.userId });
   const tokenUser = createTokenUser(user);
   res.status(StatusCodes.OK).json({ user: tokenUser, location: user.location });
@@ -169,9 +170,12 @@ const verifyEmail = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
-  console.log(email);
+
   if (!email) {
     throw new CustomError.BadRequestError("please provide an email address");
+  }
+  if (email === "testuser@test.com") {
+    throw new CustomError.BadRequestError("Test User - Read-only!");
   }
   const user = await User.findOne({ email });
   if (user) {
@@ -179,7 +183,7 @@ const forgotPassword = async (req, res) => {
     user.passwordTokenExpirationDate = new Date(Date.now() + 60 * 1000 * 10);
     await user.save();
     const origin = "http://localhost:3000";
-    sendResetPasswordEmail({
+    sendResetPasswordEmailSG({
       email,
       passwordToken: user.passwordToken,
       origin,
