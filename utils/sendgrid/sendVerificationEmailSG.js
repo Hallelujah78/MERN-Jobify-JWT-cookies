@@ -672,25 +672,25 @@ const sendVerificationEmailSG = async ({ user, origin }) => {
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
                                         target="_blank" href=${origin}
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Facebook" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414281/icons8-facebook-48_kdzmdz.png" alt="Fb" width="32"
+                                          title="Facebook" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684502155/icons8-facebook-48_a4qwge.png" alt="Fb" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
                                         target="_blank" href=${origin}
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Twitter" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414291/icons8-twitter-48_oeawjr.png" alt="Tw" width="32"
+                                          title="Twitter" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684502155/icons8-twitter-48_bwcgmq.png" alt="Twitter" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0;padding-right:30px"><a
                                         target="_blank" href=${origin}
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Instagram" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414292/icons8-instagram-48_azcuxl.png" alt="Inst" width="32"
+                                          title="Instagram" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684502155/icons8-instagram-48_f28z5x.png" alt="Inst" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                     <td align="center" valign="top" style="padding:0;Margin:0"><a target="_blank"
                                         href=${origin}
                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px"><img
-                                          title="Youtube" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684414292/icons8-youtube-48_p2e6xi.png" alt="Yt" width="32"
+                                          title="Youtube" src="https://res.cloudinary.com/duar7ipaf/image/upload/v1684502155/icons8-youtube-48_gkgc3v.png" alt="Yt" width="32"
                                           style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                     </td>
                                   </tr>
