@@ -70,7 +70,7 @@ const register = async (req, res) => {
   const verificationToken = crypto.randomBytes(40).toString("hex");
 
   const user = await User.create({ name, email, password, verificationToken });
-  const origin = "http://localhost:5000";
+  const origin = "https://mern-jobify-cookies.onrender.com";
   await sendVerificationEmailSG({ user, origin });
 
   res.status(StatusCodes.CREATED).json({
@@ -182,7 +182,7 @@ const forgotPassword = async (req, res) => {
     user.passwordToken = crypto.randomBytes(70).toString("hex");
     user.passwordTokenExpirationDate = new Date(Date.now() + 60 * 1000 * 10);
     await user.save();
-    const origin = "http://localhost:5000";
+    const origin = "https://mern-jobify-cookies.onrender.com";
     sendResetPasswordEmailSG({
       email,
       passwordToken: user.passwordToken,
