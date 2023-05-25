@@ -5,7 +5,7 @@ import sendMail from "./sendMail.js";
 import sendVerificationEmail from "./sendVerificationEmail.js";
 import sendResetPasswordEmail from "./sendResetPasswordEmail.js";
 import { attachCookiesToResponse, createJWT, isTokenValid } from "./jwt.js";
-import attachCookie from "./attackCookie.js";
+import attachCookie from "./attachCookie.js";
 import sendVerificationEmailSG from "./sendgrid/sendVerificationEmailSG.js";
 import sendResetPasswordEmailSG from "./sendgrid/sendResetPasswordEmailSG.js";
 
